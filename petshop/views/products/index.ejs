@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pet Shop</title>
+  </head>
+  <body>
+    <h1>Welcome to our Petshop</h1>
+    <% for (let pet of pets) {%>
+      <li><a href="/<%= pet._id %>"><%= pet.name %></a></li>
+    <% } %>
+
+  </body>
+</html>
