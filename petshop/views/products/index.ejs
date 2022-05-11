@@ -5,10 +5,15 @@
     <title>Pet Shop</title>
   </head>
   <body>
+    <div class="">
+
+
     <h1>Welcome to our Petshop</h1>
     <% for (let pet of pets) {%>
       <li><a href="/<%= pet._id %>"><%= pet.name %></a></li>
     <% } %>
+</div>
 
+<button type="button" name="button"><a href="/new">Add New</a></button>
   </body>
 </html>

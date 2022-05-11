@@ -12,22 +12,33 @@ mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
     console.log(err);
   })
 
-const Pets = require('./models/pets')
+const Pet = require('./models/pets')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({extende:true}));
+app.use(express.urlencoded({extended:true}));
 
 app.get('/', async (req, res) => {
-  const pets = await Pets.find({})
+  const pets = await Pet.find({})
+  console.log(pets)
   res.render('products/index', { pets })
 })
 
 app.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const pets = await Pets.findById(id)
+  const pets = await Pet.findById(id)
   res.render('products/details', { pets } )
+})
+
+// adding New
+app.get('/new', (req, res) => {
+  res.render('products/new')
+})
+
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send('Sent data.')
 })
 
 

@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 // require model database
-const Pets = require('./models/pets');
+const Pet = require('./models/pets');
 
 mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
   .then(() => {
-    console.log("Mongo connection open!!!");
+    console.log("Mongo open!!!");
   })
   .catch(() => {
-    console.log("Oh no Mongo Connection error!!");
+    console.log("Mongo Connection error!!");
     console.log(err);
   })
 
@@ -46,11 +46,12 @@ const seedPets = [
   }
 ]
 
-// if any of the seedProducts dont passed
+// if any of the seedProducts doesnt passed
 // mongoose's validation, then nothing will be inserted
-Pets.insertMany(seedPets)
+Pet.insertMany(seedPets)
   .then(res => {
     console.log(res)
+    console.log('it worked')
   })
   .catch(e => {
     console.log(e)
