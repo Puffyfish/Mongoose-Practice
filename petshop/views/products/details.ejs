@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><%= pets.name %></title>
+    <link rel="icon" href="/icon.png">
   </head>
   <body>
     <div class="">
@@ -12,14 +13,19 @@
     <img src="https://images.unsplash.com/photo-1597662942557-4087865bf476?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80" alt="">
 
     <ul>
-      <li>Breed: <%= pets.breed %></li>
+      <li>Breed: <%=pets.breed%></li>
+      <li>Age: <%= pets.age %></li>
       <li>Price: <%= pets.price %></li>
       <li>Category: <%= pets.category %></li>
+
     </ul>
 
 <div class="">
-  <button>Update</button>
+
+  <a href="/<%=pets._id%>/edit"><button >Update</button></a>
+  <form class="" action="/<%=pets._id%>?_method=DELETE" method="post">
   <button>Delete</button>
+</form>
 </div>
       </div>
 

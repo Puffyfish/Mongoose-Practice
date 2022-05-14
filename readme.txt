@@ -8,4 +8,9 @@
 
 CRUD
 7. homepage/show page
-8. 
+8. creating new product
+	a. get route
+	b. post route
+9. updating product
+	a. get route
+	b. put route(method-override, collection.findByIdAndUpdate(id, req.body, {runValidators: true})

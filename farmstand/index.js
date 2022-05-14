@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 
 // require model database
 const Product = require('./models/product');
+const categories = ['fruit', 'vegetable', 'dairy', 'mushroom']
 
 mongoose.connect('mongodb://localhost:27017/farmStand', { useNewUrlParser: true })
   .then(() => {
@@ -37,7 +38,7 @@ app.get('/products', async (req, res) => {
 
 // one of the routes needed to create product: a form to input data
 app.get('/products/new', (req, res) => {
-  res.render('products/new')
+  res.render('products/new', { categories} )
 })
 
 // one of the routes needed to create product: to receive data
@@ -58,7 +59,7 @@ app.get('/products/:id', async (req, res) => {
 app.get('/products/:id/edit', async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id)
-  res.render('products/edit', { product })
+  res.render('products/edit', { product, categories })
 })
 
 // post after sending data from editing product
@@ -67,6 +68,14 @@ app.put('/products/:id', async(req, res) => {
   const product = await Product.findByIdAndUpdate(id, req.body, {runValidators: true, new: true})
   // console.log(req.body) if you want to see the data
   res.redirect(`/products/${product._id}`)
+})
+
+// Delete route
+app.delete('/products/:id', async(req, res) => {
+  const { id } = req.params;
+  const deletedProduct = await Product.findByIdAndDelete(id);
+  console.log(`${deletedProduct.name} has been deleted`)
+  res.redirect('/products');
 })
 
 app.listen(3000, () => {

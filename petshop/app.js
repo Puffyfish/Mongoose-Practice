@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+
 
 mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
   .then(() => {
@@ -13,32 +15,63 @@ mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
   })
 
 const Pet = require('./models/pets')
+const categories = ['dog', 'cat', 'fish', 'bird']
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride('_method'))
 
+// DEFINE ROUTES
+
+// Show route
 app.get('/', async (req, res) => {
   const pets = await Pet.find({})
   console.log(pets)
   res.render('products/index', { pets })
 })
 
+// New route (a)
+app.get('/new', (req, res) => {
+  res.render('products/new')
+})
+
+// show route for specific id
 app.get('/:id', async (req, res) => {
   const { id } = req.params;
   const pets = await Pet.findById(id)
   res.render('products/details', { pets } )
 })
 
-// adding New
-app.get('/new', (req, res) => {
-  res.render('products/new')
+// New route (b)
+app.post('/', async (req, res) => {
+  const newPet = new Pet(req.body)
+  await newPet.save();
+  console.log(newPet)
+  res.redirect(`/${newPet._id}`);
 })
 
-app.post('/', (req, res) => {
-  console.log(req.body)
-  res.send('Sent data.')
+// Edit route
+app.get('/:id/edit', async (req, res) => {
+  const { id } = req.params;
+  const pets = await Pet.findById(id)
+  res.render('products/edit', { pets, categories } )
+})
+
+app.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const editedPet = await Pet.findByIdAndUpdate(id, req.body, {runValidators: true, new: true})
+  res.redirect(`/${editedPet._id}`);
+})
+
+// Delete route
+app.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  const deletedPet = await Pet.findByIdAndDelete(id);
+  console.log(`${deletedPet.name} has been deleted`);
+  res.redirect('/');
 })
 
 
