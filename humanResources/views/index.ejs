@@ -2,12 +2,21 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Employees Dashboard</title>
+    <link rel="icon" href="/human-resources.png">
   </head>
   <body>
     <h1>Welcome</h1>
+    <div class="">
+
+
+    <ul>
     <% for (let employee of employees) {%>
-      <li><%=employee.name%></li>
+      <li><a href="/<%= employee._id %>"><%=employee.name%></a></li>
     <%}%>
+    </ul>
+    </div>
+
+    <a href="/new">Add new</a>
   </body>
 </html>

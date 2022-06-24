@@ -1,19 +1,23 @@
 const mongoose = require('mongoose');
-
-const productSchema = new mongoose.Schema({
+const {Schema} = mongoose;
+const productSchema = new Schema({
   name: {
     type: String,
-    require: true
+    required: true
   },
   price: {
     type: Number,
-    require: true,
+    required: true,
     min: 0
   },
   category: {
     type: String,
     lowercase: true,
     enum: ['fruit', 'vegetable', 'dairy', 'mushroom']
+  },
+  farm: {
+    type: Schema.Types.ObjectID, // to display the owner of the products sold
+    ref: 'Farm'
   }
 })
 

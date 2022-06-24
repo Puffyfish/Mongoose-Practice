@@ -6,9 +6,10 @@ const methodOverride = require('method-override')
 
 // require model database
 const Product = require('./models/product');
+const Farm = require('./models/farm');
 const categories = ['fruit', 'vegetable', 'dairy', 'mushroom']
 
-mongoose.connect('mongodb://localhost:27017/farmStand', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/farmStandStage2', { useNewUrlParser: true })
   .then(() => {
     console.log("Mongo connection open!!!");
   })
@@ -27,7 +28,25 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 
-// DEFINE ROUTES
+// FARM routes
+app.get('/farms', async(req, res) => {
+  const farms = await Farm.find({})
+  res.render('farms/index', {farms});
+})
+
+app.get('/farms/new', (req, res) => {
+  res.render('farms/new');
+})
+
+app.post('/farms', async(req, res) => {
+  const farm = new Farm(req.body);
+  await farm.save();
+  console.log(farm);
+  res.redirect('/farms');
+})
+
+
+// PRODUCT ROUTES
 app.get('/products', async (req, res) => {
   // this is an async fxn coz Product.find will take some time to load
   // product.find({}) means to find ALL products

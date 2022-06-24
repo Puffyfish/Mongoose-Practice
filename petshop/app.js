@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 
 
 mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
 const Pet = require('./models/pets')
 const categories = ['dog', 'cat', 'fish', 'bird']
 
+app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 

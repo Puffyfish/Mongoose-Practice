@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Employee</title>
+    <link rel="icon" href="/human-resources.png">
+  </head>
+  <body>
+    <div class="">
+      <form class="" action="/<%=employee._id%>?_method=PUT" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Employee's Name" value="<%=employee.name%>">
+        <br>
+        <label for="position">Position:</label>
+        <input type="text" name="position" id="position" value="<%=employee.position%>">
+        <br>
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender" value="<%=employee.gender%>">
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+        </select>
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" value="<%=employee.age%>">
+        <br>
+        <label for="yearsEmployed">Years Employed:</label>
+        <input type="number" name="yearsEmployed" id="yearsEmployed" value="<%=employee.yearsEmployed%>" >
+        <br>
+        <label for="jobcategory">Select Category</label>
+        <select name="jobcategory" id="jobcategory" value="<%=employee.jobcategory%>">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+        </select>
+        <br>
+        <label for="salary">Salary:</label>
+        <input type="number" name="salary" id="salary" value="<%=employee.salary%>">
+
+        <button>Update</button>
+      </form>
+    </div>
+
+    <a href="/">Cancel</a>
+  </body>
+</html>

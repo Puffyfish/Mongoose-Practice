@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Employee Information</title>
+  <link rel="icon" href="/human-resources.png">
+</head>
+
+<body>
+  <div class="">
+    <h1><%= employee.name %></h1>
+    <ul>
+      <li>Position: <%= employee.position %></li>
+      <li>Gender: <%= employee.gender %></li>
+      <li>Age: <%= employee.age %></li>
+      <li>Years Employed: <%= employee.yearsEmployed %></li>
+      <li>Job Category: <%= employee.jobcategory %></li>
+      <li>Salary: <%= employee.salary %></li>
+    </ul>
+  </div>
+  <button><a href="/<%=employee._id%>/edit">Edit</a></button>
+
+  <form class="" action="/<%=employee._id%>?_method=DELETE" method="POST">
+      <button>Delete</button>
+  </form>
+  <a href="/">Back to dashboard</a>
+</body>
+
+</html>
